@@ -29,6 +29,7 @@ model Pedido {
   total          Float
   criadoEm       DateTime     @default(now())
   itens          ItemPedido[]
+  endereco Endereco?
 }
 
 model ItemPedido {
@@ -50,4 +51,17 @@ model Produto {
   criadoEm  DateTime @default(now())
 
   itens ItemPedido[]
+}
+
+model Endereco {
+  id          Int     @id @default(autoincrement())
+  pedidoId    Int     @unique
+  pedido      Pedido  @relation(fields: [pedidoId], references: [id])
+
+  rua         String
+  numero      String
+  bairro      String
+  cidade      String
+  complemento String?
+  referencia  String?
 }
