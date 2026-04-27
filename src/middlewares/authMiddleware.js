@@ -13,6 +13,7 @@ export function autenticarUsuario(req, res, next) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
     req.usuarioId = decoded.id
+    req.usuarioTipo = decoded.tipo
 
     return next()
   } catch {
