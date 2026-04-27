@@ -78,3 +78,41 @@ export async function listarPedidos(req, res) {
 
   return res.json(pedidos)
 }
+
+export async function listarTodosPedidos(req, res) {
+  const pedidos = await prisma.pedido.findMany({
+    include: {
+      usuario: true,
+      itens: {
+        include: {
+          produto: true
+        }
+      }
+    },
+    orderBy: {
+      criadoEm: 'desc'
+    }
+  })
+
+  return res.json(pedidos)
+}
+
+export async function atualizarStatusPedido(req, res) {
+  const { id } = req.params
+  const { status } = req.body
+
+  const pedido = await prisma.pedido.findUnique({
+    where: { id: Number(id) }
+  })
+
+  if (!pedido) {
+    return res.status(404).json({ mensagem: 'Pedido não encontrado' })
+  }
+
+  const pedidoAtualizado = await prisma.pedido.update({
+    where: { id: Number(id) },
+    data: { status }
+  })
+
+  return res.json(pedidoAtualizado)
+}
