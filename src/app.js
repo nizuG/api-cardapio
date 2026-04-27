@@ -14,8 +14,12 @@ app.get('/', (req, res) => {
   res.json({ mensagem: 'API de pedidos funcionando 🚀' })
 })
 
-app.use(usuarioRoutes)
-app.use(produtoRoutes)
-app.use(pedidoRoutes)
+app.get('/api', (req, res) => {
+  res.json({ mensagem: 'API de pedidos funcionando 🚀' })
+})
+
+app.use('/api', usuarioRoutes)
+app.use('/api', produtoRoutes)
+app.use('/api', pedidoRoutes)
 
 export default app
