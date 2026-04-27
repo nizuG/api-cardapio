@@ -45,7 +45,7 @@ src/
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
+git clone https://github.com/nizuG/api-cardapio.git
 cd seu-repo
 ```
 
